@@ -1,0 +1,484 @@
+:root {
+  color-scheme: dark;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  overscroll-behavior: none;
+}
+
+/* ---- Feed + snap ---- */
+.feed {
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.feed::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  position: relative;
+  height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  overflow: hidden;
+}
+
+.card__media {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- YouTube: full-bleed, letterboxed on black ---- */
+.embed--youtube {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card iframe {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0;
+}
+
+/* ---- Fallback card ---- */
+.embed--card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.card__thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card__open {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  padding: 12px 22px;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* ---- X: TweetPik-style card (Lights Out) on a generated backdrop ---- */
+.xcard {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 72px 190px 20px;
+  background:
+    radial-gradient(80% 55% at 50% 42%, hsl(var(--h) 58% 24%), transparent 70%),
+    radial-gradient(120% 90% at 50% 108%, hsl(calc(var(--h) + 30) 48% 14%), transparent 60%),
+    #050505;
+}
+
+.xcard__bg {
+  position: absolute;
+  inset: -6%;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.1);
+  animation: kenburns 20s ease-in-out infinite alternate;
+}
+
+.xcard--photo .xcard__bg {
+  filter: blur(16px) brightness(0.6) saturate(1.1);
+}
+
+.xcard--media .xcard__bg {
+  filter: brightness(0.74) saturate(1.05);
+}
+
+.xcard--photo::after,
+.xcard--media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(75% 60% at 50% 45%, transparent, rgba(0, 0, 0, 0.42));
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.1) translate(0, 0);
+  }
+  to {
+    transform: scale(1.22) translate(-2.5%, -2%);
+  }
+}
+
+.tweet {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 22px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid #e1e8ed;
+  box-shadow: 0 30px 72px rgba(0, 0, 0, 0.5);
+  color: #0f1419;
+  text-decoration: none;
+}
+
+.tweet__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tweet__avatar {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 20px;
+  color: #fff;
+  background: hsl(var(--h) 58% 46%);
+}
+
+.tweet__names {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.tweet__name {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #0f1419;
+}
+
+.tweet__verified {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  color: #1d9bf0;
+}
+
+.tweet__handle {
+  color: #536471;
+  font-size: 14px;
+}
+
+.tweet__logo {
+  flex: 0 0 auto;
+  width: 22px;
+  color: #0f1419;
+}
+
+.tweet__text {
+  font-size: 15px;
+  line-height: 1.4;
+  letter-spacing: -0.003em;
+  color: #0f1419;
+  white-space: pre-wrap;
+}
+
+.tweet__footer {
+  font-size: 14px;
+  color: #536471;
+}
+
+.tweet__footer b {
+  color: #0f1419;
+  font-weight: 700;
+}
+
+.tweet__media {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e1e8ed;
+}
+
+.tweet__media img {
+  display: block;
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+}
+
+.tweet__video {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e1e8ed;
+  background: #000;
+}
+
+.tweet__video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 62vh;
+  background: #000;
+}
+
+.tweet__playbtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 62px;
+  height: 62px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.tweet__playbtn svg {
+  width: 28px;
+  height: 28px;
+  margin-left: 3px;
+}
+
+.tweet__video.is-paused .tweet__playbtn {
+  display: flex;
+}
+
+.tweet__text--clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---- Caption (bottom-left) ---- */
+.caption {
+  position: absolute;
+  left: 0;
+  right: 84px;
+  bottom: 0;
+  z-index: 3;
+  padding: 16px 16px calc(24px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  pointer-events: none;
+}
+
+.caption__author {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.caption__text {
+  font-size: 15px;
+  line-height: 1.4;
+  max-height: 4.2em;
+  overflow: hidden;
+}
+
+.caption__meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.caption__meta svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ---- Right action rail ---- */
+.rail {
+  position: absolute;
+  right: 8px;
+  bottom: 110px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.rail__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+
+.rail__icon svg {
+  width: 34px;
+  height: 34px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.rail__label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.rail__btn--saved {
+  color: #ffd54a;
+}
+
+/* ---- Top chrome ---- */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent);
+  pointer-events: none;
+}
+
+.topbar__icon {
+  background: none;
+  border: 0;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.topbar__sync svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.topbar__sync.is-spinning svg {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: 20px;
+  pointer-events: auto;
+}
+
+.tab {
+  background: none;
+  border: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  padding: 2px 0;
+}
+
+.tab--active {
+  color: #fff;
+}
+
+.tab--active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: #fff;
+}
+
+/* ---- Tap-for-sound hint ---- */
+.sound-hint {
+  position: fixed;
+  top: calc(58px + env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  font-size: 13px;
+  font-weight: 600;
+  transition: opacity 0.3s ease;
+}
+
+.sound-hint svg {
+  width: 16px;
+  height: 16px;
+}
+
+body.sound-on .sound-hint {
+  opacity: 0;
+  pointer-events: none;
+}

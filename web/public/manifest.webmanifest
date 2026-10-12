@@ -1,0 +1,19 @@
+{
+  "name": "reelmarks",
+  "short_name": "reelmarks",
+  "description": "Your bookmarks, as a feed.",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "start_url": "./",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@reelmarks/companion",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "cert": "node scripts/cert.mjs",
+    "serve": "tsx server.ts"
+  },
+  "dependencies": {
+    "@reelmarks/shared": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "tsx": "^4.19.0",
+    "@types/node": "^22.0.0",
+    "selfsigned": "^2.4.1"
+  }
+}
